@@ -46,8 +46,8 @@ cv2.drawContours(orig_image, [doc_cnts], -1, (0, 255, 0), 3)
 warped = four_point_transform(orig_image, doc_cnts.reshape(4, 2))
 # convert the warped image to grayscale
 warped = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
-###cv2.imshow("Scanned", warped) # The end goal of this whole program
+cv2.imshow("Scanned", warped) # The end goal of this whole program
 cv2.imwrite('resultbill.jpg', warped)
-
+print("done")
 cv2.waitKey(0)
 cv2.destroyAllWindows()
