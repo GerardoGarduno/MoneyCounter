@@ -18,7 +18,7 @@ captureButton.addEventListener('click', function() {
   canvas.height = video.videoHeight;
   var context = canvas.getContext('2d');
   context.drawImage(video, 0, 0, canvas.width, canvas.height);
-  var dataUrl = canvas.toDataURL('image/png');
+  var dataUrl = canvas.toDataURL('image/jpeg');
 
   // TODO: Send the dataUrl to the server using an AJAX request
   console.log(dataUrl);
