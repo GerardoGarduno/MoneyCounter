@@ -29,38 +29,6 @@ class App extends Component {
       });
   }
 
-  // handleUpload(event) {
-  //   console.log("eneterd");
-  //   event.preventDefault();
-  //   const formData = new FormData();
-  //   const fileInput = document.querySelector('#file');
-    
-  //   if (!fileInput) {
-  //     console.error('File input element not found');
-  //     return;
-  //   }
-    
-  //   const files = fileInput.files;
-
-  //   for (let i = 0; i < files.length; i++) {
-  //     formData.append('file', files[i]);
-  //   }
-
-  //   this.setState({ uploading: true });
-  //   fetch('http://localhost:5000/upload', {
-  //     method: 'POST',
-  //     body: formData
-  //   }).then(response => {
-  //     if (response.ok) {
-  //       alert('Upload successful');
-  //       fileInput.value = null; // reset the file input field
-  //       this.setState({ uploading: false });
-  //     } else {
-  //       alert('Upload failed');
-  //       this.setState({ uploading: false });
-  //     }
-  //   });
-  // }
   handleUpload(event) {
     event.preventDefault();
     const formData = new FormData();
@@ -98,7 +66,7 @@ class App extends Component {
   }
   
 
-  render() {
+render() {
     return (
       <div>
         <h1>Total Amount of Money:</h1>

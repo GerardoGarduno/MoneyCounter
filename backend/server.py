@@ -25,8 +25,9 @@ def process_images():
     bills = []
     image_files = [os.path.join(image_folder, file) for file in os.listdir(image_folder) if file.endswith('.jpg')]
     for image_file in image_files:
-        prediction = model.predict(image_file, confidence=40, overlap=30).json()
+        prediction = model.predict(image_file, confidence=4, overlap=30).json()
         for obj in prediction['predictions']:
+            print(obj)
             label = obj['class']
             if label == '100Dollar':
                 total += 100
@@ -39,9 +40,17 @@ def process_images():
             elif label == '5Dollar':
                 total += 5
             elif label == '1Dollar':
-                total += 1
+                total += 1  
+            else:
+                print("tring to make unknoen")
+                label = 'UnknownBill'
+
             confidence = obj['confidence']
+            # if label not in  ['100Dollar', '50Dollar', '20Dollar', '10Dollar', '5Dollar', '1Dollar']:
+            #     print("Dollar could not bbe read")
+            #     window.notify("Could not tag a bill to a label in the model")
             bills.append({'label': label, 'confidence': confidence})
+           # window.notify("Successfully read ${label} bill from image.");
 
 # Process the images once at server startup
 process_images()
@@ -67,6 +76,9 @@ def upload():
         return jsonify({'success': False}), 500
 
 
+print("runnning server")
+
 if __name__ == '__main__':
     app.run(debug=True)
+   
 
