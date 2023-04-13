@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Webcam from "react-webcam";
+
 
 class App extends Component {
   constructor(props) {
@@ -64,6 +66,14 @@ class App extends Component {
       }
     });
   }
+  capture() {
+    const imageSrc = this.webcamRef.getScreenshot();
+    //formData.append('file', files[i]);
+
+    //need to send this to folder
+    //this.handleUpload(imageSrc);
+    console.log(imageSrc);
+  }
   
 
 render() {
@@ -83,6 +93,13 @@ render() {
           <input id="file" type="file" name="file" multiple />
           <button type="submit" disabled={this.state.uploading}>Upload</button>
         </form>
+        <Webcam
+          audio={false}
+          ref={ref => this.webcamRef = ref}
+          screenshotFormat="image/jpeg"
+         />
+        <button onClick={this.capture}>Capture</button> {/* uncomment this line */}
+        {/* <button onClick={capture}>Capture</button>   */}
       </div>
     );
   }
