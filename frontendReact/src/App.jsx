@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Link } from 'react';
 import Webcam from "react-webcam";
 
 
@@ -10,6 +10,7 @@ class App extends Component {
       total: null,
       uploading: false
     };
+    this.capture = this.capture.bind(this); // bind capture method to component instance
     this.handleUpload = this.handleUpload.bind(this);
   }
 
@@ -93,13 +94,15 @@ render() {
           <input id="file" type="file" name="file" multiple />
           <button type="submit" disabled={this.state.uploading}>Upload</button>
         </form>
-        <Webcam
+        {/* <Webcam
           audio={false}
           ref={ref => this.webcamRef = ref}
           screenshotFormat="image/jpeg"
-         />
-        <button onClick={this.capture}>Capture</button> {/* uncomment this line */}
+         /> */}
+        <button onClick={this.capture}>Capture</button> 
+        {/* uncomment this line */}
         {/* <button onClick={capture}>Capture</button>   */}
+   
       </div>
     );
   }
