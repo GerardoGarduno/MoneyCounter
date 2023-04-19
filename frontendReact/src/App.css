@@ -16,7 +16,6 @@
   background-color: green;
 }
 .chooseOption{
-position: absolute;
 width: 237px;
 height: 40px;
 left: 62px;
@@ -34,7 +33,7 @@ letter-spacing: -0.02em;
 color: #127C56;
 }
 .groupofButton1{
-  position: absolute;
+margin-top: 1in;
 width: 231px;
 height: 57px;
 left: 65px;
@@ -45,14 +44,17 @@ border-radius: 15px;
 
 }
 .groupofButton2{
-position: absolute;
 width: 231px;
 height: 57px;
 left: 65px;
 top: 338px;
-margin-top: 1in;
+margin-top: 0.5in;
 background: #127C56;
 border-radius: 15px;
+}
+.centerBlock{
+  display: grid;
+  justify-content: center;
 }
 
 
