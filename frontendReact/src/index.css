@@ -1,16 +1,11 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  /* background-color: #ffffff; */
   background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%2346cc5a' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%23201942' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%234dc55f' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23251950' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%2353be64' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%23291a5e' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%235ab868' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%232e1a6c' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%2360b16d' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%23321b7a' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%2367aa72' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%23371b88' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
 }
 

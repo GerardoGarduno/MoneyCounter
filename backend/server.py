@@ -18,7 +18,7 @@ image_folder = os.path.join(script_folder, 'images')
 # Initialize total and bills
 total = 0
 bills = []
-
+#funtion that runs the model on entire wallet
 def process_images():
     global total, bills
     total = 0
@@ -41,19 +41,12 @@ def process_images():
                 total += 5
             elif label == '1Dollar':
                 total += 1  
-            else:
+            elif label == '':
                 print("tring to make unknoen")
                 label = 'UnknownBill'
-
             confidence = obj['confidence']
-            # if label not in  ['100Dollar', '50Dollar', '20Dollar', '10Dollar', '5Dollar', '1Dollar']:
-            #     print("Dollar could not bbe read")
-            #     window.notify("Could not tag a bill to a label in the model")
             bills.append({'label': label, 'confidence': confidence})
            # window.notify("Successfully read ${label} bill from image.");
-
-# Process the images once at server startup
-process_images()
 
 @app.route('/total')
 def get_total():
@@ -76,7 +69,8 @@ def upload():
         return jsonify({'success': False}), 500
 
 #new route for webcame upload ???
-
+#on server start process the images
+process_images()
 print("runnning server")
 
 if __name__ == '__main__':

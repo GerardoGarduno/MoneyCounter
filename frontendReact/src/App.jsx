@@ -1,24 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import homePage from './webPages/homePage';
+import walletPage from './webPages/walletPage';
+import cameraPage from './webPages/cameraPage';
 function App() {
- 
 
   return (
     <div className="App">
-      <div className="NavBar">MoneyCounter</div>
-      <div className="centerBlock">
-        test
-        <div className="chooseOption"><h3>Choose Option</h3> </div>
-        <button className="groupofButton1">Camera</button>
-        <button className="groupofButton2" >Virtual Wallet</button>
-      </div>
-    
-   
+    <Router>
+        <Routes>
+          <Route exact path = '/' Component={homePage}/>
+          <Route exact path = '/walletPage' Component= {walletPage}/>
+          <Route exact path = '/cameraPage' Component={cameraPage}/>
+        </Routes>
+    </Router>
+
+
     </div>
+
   )
 }
 
-export default App
+export default App;
