@@ -14,3 +14,6 @@ You can use Brew install on Mac
 3)If prompted with errors install the dependecies using 'brew install package'  
 
 Note: Uncomment the "cv2.imshow" lines to show the intermediate results of the image processing. 
+
+For the front end use npm install
+then run npm run dev
