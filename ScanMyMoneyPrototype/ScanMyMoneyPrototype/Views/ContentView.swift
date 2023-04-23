@@ -37,8 +37,10 @@ struct ContentView: View {
                             .foregroundColor(Color.white)
                             .foregroundStyle(.black)
                             .background(
-                                Color.green.matchedGeometryEffect(id: "background", in: namespace)
+                                Color.green
+                            .matchedGeometryEffect(id: "background", in: namespace)
                             )
+                            .cornerRadius(90)
                             .matchedGeometryEffect(id: "title", in: namespace)
                             .hapticFeedback()
                     }
@@ -56,16 +58,16 @@ struct ContentView: View {
                         //                        .font(.system(size: 30, weight: .medium, design: .default))
                             .font(.custom("impact", size: 30).weight(.bold))
                             .foregroundColor(Color.white)
-                            .background(
-                                
-                                Color.green.matchedGeometryEffect(id: "background", in: namespace)
+                            .background(Color("darkGreen")
+                            .matchedGeometryEffect(id: "background", in: namespace)
                             )
-                        Spacer()
+                    
                         Button("Click Here") {
                             //changeProfileImage = true
                             cameraScreen = true
                             startScreen = false
                         }
+                        Spacer()
                         
                     }
                 }
