@@ -60,16 +60,30 @@ function cameraPage(){
             </ul>
           </div>
           <div className= "webstream">
-            <Webcam
-                ref ={webcamRef}
+            {image === null ? (
+              <>
+              <Webcam
+              ref ={webcamRef}
                 className="webcam"
                 audio={false}
                 screenshotFormat="image/jpeg"
             />
-          </div>
           <div className="submitButtonEncap">
             <button  className = "submit" onClick={capture}>Capture</button>
           </div>
+          </>
+          ) : (
+            <>
+            <img  src ={image} alt = "screenshot"/>
+            <button  className = "submit"  onClick={() => setImage(null)}>Retake</button>
+            </>
+            
+          )};
+   
+          </div>
+          {/* <div className="submitButtonEncap">
+            <button  className = "submit" onClick={capture}>Capture</button>
+          </div> */}
           
           <form onSubmit={handleUpload} className = "form">
                 <input id="file" type="file" name="file" multiple />
