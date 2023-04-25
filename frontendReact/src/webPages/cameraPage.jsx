@@ -1,11 +1,12 @@
-import react, {useState, useEffect} from 'react';
+import React, {useState, useCallback, useRef} from 'react';
 import Webcam from "react-webcam";
 import {useNavigate , BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import "./webPages.css";
 
 function cameraPage(){
-    const [uploading, setUploading] = useState(false);
-
+  const webcamRef = useRef(null);
+  const [image,setImage] = useState(null);
+  const [uploading, setUploading] = useState(false);
     function handleUpload(event) {
         event.preventDefault();
         const formData = new FormData();
@@ -30,9 +31,6 @@ function cameraPage(){
           if (response.ok) {
             alert('Upload successful');
             fileInput.value = null; // reset the file input field
-    
-            // fetch updated data after successful upload
-            getData();
             //block the the upload data button while proccessing data
             setUploading(false);
           } else {
@@ -41,10 +39,14 @@ function cameraPage(){
           }
         });
     }
-    function capture() {
-        const imageSrc = webcamRef.getScreenshot();
-        console.log(imageSrc);
-    }
+    const capture = useCallback(() =>{
+      console.log("trying to camptr")
+      const imageSrc = webcamRef.current.getScreenshot();
+      setImage(imageSrc);
+      console.log(imageSrc);
+    },[webcamRef]);
+
+
     let navigate = useNavigate(); 
     const goHome = () =>{ 
       let path = '/'; 
@@ -59,23 +61,21 @@ function cameraPage(){
           </div>
           <div className= "webstream">
             <Webcam
-                  className="webcam"
-                  audio={false}
-                  ref={webcamRef => webcamRef = webcamRef}
-                  screenshotFormat="image/jpeg"
+                ref ={webcamRef}
+                className="webcam"
+                audio={false}
+                screenshotFormat="image/jpeg"
             />
           </div>
           <div className="submitButtonEncap">
             <button  className = "submit" onClick={capture}>Capture</button>
           </div>
           
-          <form onSubmit={handleUpload}>
+          <form onSubmit={handleUpload} className = "form">
                 <input id="file" type="file" name="file" multiple />
                 <button className = "submit"  type="submit" disabled={uploading}>Upload</button>
-            </form>
-        
-     
-             
+          </form>  
+  
         </div>
     )
 }
