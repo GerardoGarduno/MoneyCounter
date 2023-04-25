@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from roboflow import Roboflow
 import os
+import base64;
 
 app = Flask(__name__)
 CORS(app)
@@ -69,6 +70,24 @@ def upload():
         return jsonify({'success': False}), 500
 
 #new route for webcame upload ???
+@app.route('/upload_image', methods=['POST'])
+def upload_image():
+    # Get the image data from the request
+    image_data = request.form.get('image')
+
+    # Decode the base64 string into bytes
+    image_bytes = base64.b64decode(image_data)
+
+    # Write the image bytes to a file (optional)
+    with open('image.jpg', 'wb') as f:
+        f.write(image_bytes)
+
+    # Do something with the image bytes
+    # ...
+
+    # Return a response
+    response = {'message': 'Image uploaded successfully'}
+    return jsonify(response), 200
 #on server start process the images
 process_images()
 print("runnning server")
