@@ -27,6 +27,7 @@ struct OptionsView: View {
                         maxWidth: .infinity,
                         minHeight: 60,
                         alignment: .leading)
+                    .padding(.leading)
                     .matchedGeometryEffect(id: "title", in: namespace)
                 //                        .font(.system(size: 30, weight: .medium, design: .default))
                     //.font(.custom("impact", size: 30).weight(.bold))

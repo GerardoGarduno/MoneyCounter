@@ -14,6 +14,7 @@
 		12054D4929E12CE0006D46EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12054D4829E12CE0006D46EF /* Preview Assets.xcassets */; };
 		121F5DEC29EFC8FD0093FC95 /* MatchedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121F5DEB29EFC8FD0093FC95 /* MatchedView.swift */; };
 		121F5DEF29F06D250093FC95 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 121F5DEE29F06D250093FC95 /* Launch Screen.storyboard */; };
+		12543E4429F8E5520024855B /* walletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12543E4329F8E5520024855B /* walletView.swift */; };
 		1269517729F09161007E1606 /* imagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269517629F09161007E1606 /* imagePicker.swift */; };
 		12D1A21C29F0B77200C0BAF6 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D1A21B29F0B77200C0BAF6 /* OptionsView.swift */; };
 		12D1A22029F2442900C0BAF6 /* SelectButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D1A21F29F2442900C0BAF6 /* SelectButtons.swift */; };
@@ -28,6 +29,7 @@
 		12054D4829E12CE0006D46EF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		121F5DEB29EFC8FD0093FC95 /* MatchedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchedView.swift; sourceTree = "<group>"; };
 		121F5DEE29F06D250093FC95 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		12543E4329F8E5520024855B /* walletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = walletView.swift; sourceTree = "<group>"; };
 		1269517629F09161007E1606 /* imagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imagePicker.swift; sourceTree = "<group>"; };
 		12D1A21B29F0B77200C0BAF6 /* OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
 		12D1A21F29F2442900C0BAF6 /* SelectButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectButtons.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				12D1A21B29F0B77200C0BAF6 /* OptionsView.swift */,
 				121F5DEE29F06D250093FC95 /* Launch Screen.storyboard */,
 				121F5DEB29EFC8FD0093FC95 /* MatchedView.swift */,
+				12543E4329F8E5520024855B /* walletView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 				121F5DEC29EFC8FD0093FC95 /* MatchedView.swift in Sources */,
 				12D1A21C29F0B77200C0BAF6 /* OptionsView.swift in Sources */,
 				12054D4229E12CDE006D46EF /* ScanMyMoneyPrototypeApp.swift in Sources */,
+				12543E4429F8E5520024855B /* walletView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

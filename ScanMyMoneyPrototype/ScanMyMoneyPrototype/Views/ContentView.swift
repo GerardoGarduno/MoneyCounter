@@ -87,6 +87,7 @@ struct ContentView: View {
                                     minHeight: 60,
                                     alignment: .leading)
                                 .matchedGeometryEffect(id: "title", in: namespace)
+                                .padding(.leading)
                             //                        .font(.system(size: 30, weight: .medium, design: .default))
                                 //.font(.custom("impact", size: 30).weight(.bold))
                                 .font(.system(size:30, weight: .heavy, design: .default))
@@ -95,6 +96,7 @@ struct ContentView: View {
                                     
                                     Color("darkGreen").matchedGeometryEffect(id: "background", in: namespace)
                                 )
+                                
                             
                             
                             Text("Choose an Option".uppercased())
@@ -320,6 +322,9 @@ struct ContentView: View {
                 //ImagePicker(selectedImage: $imageSelected, sourceType: .photoLibrary)
                 
             }
+        }
+        if wallet {
+            
         }
     } // -- body
 } // -- struct
