@@ -13,30 +13,44 @@ struct SelectButtons: View {
     @State var text: String
     @State var image: String
     @State var imagePlace: CGFloat
+    @State var justIcon: Bool
     
     var body: some View {
-       
-            
-        ZStack {
-            
-            Capsule()
-            
-                .frame(width: 300, height: 50)
-                .foregroundColor(isSelected ? color: Color("darkGreen"))
-            Image(systemName: image)
-                .frame(maxWidth: imagePlace, alignment: .leading)
-                .foregroundColor(.white)
-                .font(.title);
+        
+        if (!justIcon) {
+            ZStack {
+                
+                Capsule()
+                
+                    .frame(width: 300, height: 50)
+                    .foregroundColor(isSelected ? color: Color("darkGreen"))
+                Image(systemName: image)
+                    .frame(maxWidth: imagePlace, alignment: .leading)
+                    .foregroundColor(.white)
+                    .font(.title);
                 Text(text)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity,alignment: .center)
                     .font(.title);
-            
-            
-            
-            
-           
                 
+                
+                
+                
+                
+                
+            }
+        }
+        else{
+            ZStack {
+                
+                Capsule()
+                    .frame(width: 50, height: 50)
+                    .foregroundColor(isSelected ? color: Color("darkGreen"))
+                Image(systemName: image)
+                    .frame(maxWidth: imagePlace, alignment: .trailing)
+                    .foregroundColor(.white)
+                    .font(.title);
+            }
         }
     }
 }
@@ -47,6 +61,7 @@ struct SelectButtons_Previews: PreviewProvider {
                       color: Color("darkGreen"),
                       text: "Camera Roll",
                       image: "camera.fill",
-                    imagePlace: 250)
+                    imagePlace: 0,
+                      justIcon: true)
     }
 }

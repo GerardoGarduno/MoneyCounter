@@ -57,7 +57,8 @@ struct OptionsView: View {
                         color: Color("darkGreen"),
                         text: "Camera Roll",
                         image: "camera",
-                    imagePlace: 250)
+                        imagePlace: 250,
+                        justIcon: false)
                         .onTapGesture {
                         if camera{
                             photoLib = false
@@ -70,7 +71,8 @@ struct OptionsView: View {
                         color: Color("darkGreen"),
                         text: "Photo Library",
                         image: "camera",
-                        imagePlace: 250)
+                        imagePlace: 250,
+                        justIcon: false)
                         .onTapGesture {
                         if photoLib{
                             camera = false
@@ -82,7 +84,8 @@ struct OptionsView: View {
                         color: Color("darkGreen"),
                         text: "Wallet",
                         image: "banknote.fill",
-                        imagePlace: 250)
+                        imagePlace: 250,
+                        justIcon: false)
                         .onTapGesture {
                         if photoLib{
                             camera = false

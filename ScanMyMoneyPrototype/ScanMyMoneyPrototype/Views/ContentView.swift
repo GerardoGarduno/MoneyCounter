@@ -7,8 +7,13 @@
 
 import SwiftUI
 
+
+
+
+
 struct ContentView: View {
     
+   
     @Namespace var namespace
     @State var startScreen = true
     @State var showOption = false
@@ -22,30 +27,34 @@ struct ContentView: View {
     @State var wallet = false
     
     @State var numOnes: Int = 0
-    @State var ones: String = "x $1 conf: "
+    @State var ones: String = "x $1"
     @State var percentOnes: Int = 0
     
     @State var numFives: Int = 0
-    @State var fives: String = "x $5 conf: "
+    @State var fives: String = "x $5"
     @State var percentFives: Int = 0
     
     @State var numTens: Int = 0
-    @State var tens: String = "x $10 conf: "
+    @State var tens: String = "x $10"
     @State var percentTens: Int = 0
     
     @State var numTwenties: Int = 0
-    @State var twenties: String = "x $20 conf: "
+    @State var twenties: String = "x $20"
     @State var percentTwenties: Int = 0
     
     @State var numFifties: Int = 0
-    @State var fifties: String = "x $50 conf: "
+    @State var fifties: String = "x $50"
     @State var percentFifties: Int = 0
     
     @State var numHundreds: Int = 0
-    @State var hundreds: String = "x $100 conf: "
+    @State var hundreds: String = "x $100"
     @State var percentHundreds: Int = 0
     
     @State var amountDetected: Int
+    
+    @State var totalMoney: Int = 0
+    
+    @State var lastScan: Int = 0
     
     var body: some View {
         
@@ -116,8 +125,9 @@ struct ContentView: View {
                                     isSelected: $camera,
                                     color: Color("darkGreen"),
                                     text: "Camera Roll",
-                                    image: "camera",
-                                imagePlace: 250)
+                                    image: "camera.fill",
+                                    imagePlace: 250,
+                                    justIcon: false)
                                     .onTapGesture {
                                         camera = true
                                     if camera{
@@ -131,9 +141,10 @@ struct ContentView: View {
                                 SelectButtons(
                                     isSelected: $photoLib,
                                     color: Color("darkGreen"),
-                                    text: "Photo Library",
-                                    image: "camera",
-                                    imagePlace: 250)
+                                    text: " Photo Library",
+                                    image: "photo.fill.on.rectangle.fill",
+                                    imagePlace: 250,
+                                    justIcon: false)
                                     .onTapGesture {
                                         photoLib = true
                                     if photoLib{
@@ -148,7 +159,8 @@ struct ContentView: View {
                                     color: Color("darkGreen"),
                                     text: "Wallet",
                                     image: "banknote.fill",
-                                    imagePlace: 250)
+                                    imagePlace: 250,
+                                    justIcon: false)
                                     .onTapGesture {
                                         wallet = true
                                     if wallet{
@@ -182,149 +194,348 @@ struct ContentView: View {
         //------------------------------------------------------
         if photoLib{
             VStack(spacing: 40) {
+                ZStack{
+                    Text("Result")
+                        .frame(
+                            maxWidth: .infinity,
+                            minHeight: 60,
+                            alignment: .leading)
+                        .matchedGeometryEffect(id: "title", in: namespace)
+                        .padding(.leading)
+                        .font(.system(size:30, weight: .heavy, design: .default))
+                        .foregroundColor(Color.white)
+                        .background(
+                            Color("darkGreen").matchedGeometryEffect(id: "background", in: namespace)
+                        )
+
+                        SelectButtons(
+                            isSelected: $camera,
+                            color: Color("darkGreen"),
+                            text: "",
+                            image: "camera.fill",
+                            imagePlace: 350,
+                            justIcon: true)
+                        .frame(alignment: .trailing)
+                        .onTapGesture {
+                            camera = true
+                            if camera{
+                                photoLib = false
+                                wallet = false
+                                openCameraRoll = true
+                            }
+                            
+                        }
+                        
+                        SelectButtons(
+                            isSelected: $photoLib,
+                            color: Color("darkGreen"),
+                            text: "",
+                            image: "photo.fill.on.rectangle.fill",
+                            imagePlace: 200,
+                            justIcon: true)
+                        .frame(alignment: .trailing)
+                        .onTapGesture {
+                            photoLib = true
+                            if photoLib{
+                                camera = false
+                                wallet = false
+                                openCameraRoll = true
+                            }
+                            
+                        }
+                    
+                    SelectButtons(
+                        isSelected: $wallet,
+                        color: Color("darkGreen"),
+                        text: "",
+                        image: "banknote.fill",
+                        imagePlace: 50,
+                        justIcon: true)
+                        .onTapGesture {
+                            wallet = true
+                        if wallet{
+                            startScreen = false
+                            camera = false
+                            photoLib = false
+                        }
+                    }
+                    
+                    
+                }.sheet(isPresented: $openCameraRoll) {
+                    ImagePicker(selectedImage: $imageSelected, sourceType: .photoLibrary)
+                }
                 Image(uiImage: imageSelected)
                     .resizable()
                     .frame(width: 250, height: 250, alignment: .center)
-                HStack {
-                    Text("Total Amount Detected: $")
-                    Text("\(amountDetected)")
+                    
+                    Text("Total Amount Detected: $" + "\(amountDetected)")
+                        .font(.custom("HelveticaNeue", size: 30))
+                    
+                        .frame(alignment: .center)
+                    
+                    List {
+                        
+                        Text("BreakDown")
+                            .frame(maxWidth: 350, maxHeight: 50 ,alignment: .center)
+                            .underline()
+                        
+                        Text("\(numOnes) " + ones +  " conf: \(percentOnes)%")
+                            .frame(maxWidth: 350, maxHeight: 50 ,alignment: .center)
+                        
+                        Text("\(numFives) " + fives + " conf: \(percentFives)%")
+                            .frame(maxWidth: 350, maxHeight: 50 ,alignment: .center)
+                        
+                        Text("\(numTens) " + tens + " conf: \(percentTens)%")
+                            .frame(maxWidth: 350, maxHeight: 50 ,alignment: .center)
+                        
+                        Text("\(numTwenties) " + twenties + " conf: \(percentTwenties)%")
+                            .frame(maxWidth: 350, maxHeight: 50 ,alignment: .center)
+                        
+                        Text("\(numFifties) " + fifties + " conf: \(percentFifties)%")
+                            .frame(maxWidth: 350, maxHeight: 50 ,alignment: .center)
+                        
+                        Text("\(numHundreds) " + hundreds + " conf: \(percentHundreds)%")
+                            .frame(maxWidth: 350, maxHeight: 50 ,alignment: .center)
+                        
+                    }
+                    .font(.custom("HelveticaNeue", size: 30))
+                    .scrollContentBackground(.hidden)
+                    .background(Color("darkGreen"))
+                    .foregroundColor(Color("darkGreen"))
+                    
                 }
-                .frame(alignment: .center)
-                    
-                ZStack {
-                    
-                    
-                    
-                        List {
-                            //                TextEditor(text: $fullText)
-                            Text("BreakDown")
-                            //                    .scrollContentBackground(.hidden) // <- Hide it
-                            // To see this
-                                .frame(minWidth: 250, minHeight: 25, alignment: .top)
-                                .underline()
-                                .foregroundColor(Color("darkGreen"))
-                                .font(.custom("HelveticaNeue", size: 30))
-                            
-                                .multilineTextAlignment(.center)
-                            
-                            HStack(spacing: 0) {
-                                Text("\(numOnes)")
-                                    .frame(alignment: .center)
-                                TextEditor(text: $ones)
-                                    .frame(maxWidth: 150, maxHeight: 50 ,alignment: .center)
-                                
-                                Text("\(percentOnes)")
-                                Text("%")
-                            }
-                            .frame(minWidth: 250, minHeight: 25, alignment: .top)
-                            .foregroundColor(Color("darkGreen"))
-                            .font(.custom("HelveticaNeue", size: 30))
-                            .scrollDisabled(true)
-                            .multilineTextAlignment(.center)
-                            
-                            HStack(spacing: 0) {
-                                Text("\(numFives)")
-                                TextEditor(text: $fives)
-                                    .frame(maxWidth: 150, maxHeight: 50 ,alignment: .center)
-                                Text("\(percentFives)")
-                                Text("%")
-                            }
-                            .frame(minWidth: 250, minHeight: 25, alignment: .top)
-                            .foregroundColor(Color("darkGreen"))
-                            .font(.custom("HelveticaNeue", size: 30))
-                            .scrollDisabled(true)
-                            .multilineTextAlignment(.center)
-                            
-                            HStack(spacing: 0) {
-                                Text("\(numTens)")
-                                TextEditor(text: $tens)
-                                    .frame(maxWidth: 160, maxHeight: 50 ,alignment: .center)
-                                Text("\(percentTens)")
-                                Text("%")
-                            }
-                            .frame(minWidth: 250, minHeight: 25, alignment: .top)
-                            .foregroundColor(Color("darkGreen"))
-                            .font(.custom("HelveticaNeue", size: 30))
-                            .scrollDisabled(true)
-                            .multilineTextAlignment(.center)
-                            .replaceDisabled()
-                            
-                            HStack(spacing: 0) {
-                                Text("\(numFifties)")
-                                TextEditor(text: $fifties)
-                                    .frame(maxWidth: 160, maxHeight: 50 ,alignment: .center)
-                                Text("\(percentFifties)")
-                                Text("%")
-                            }
-                            .frame(minWidth: 250, minHeight: 25, alignment: .top)
-                            .foregroundColor(Color("darkGreen"))
-                            .font(.custom("HelveticaNeue", size: 30))
-                            .scrollDisabled(true)
-                            .multilineTextAlignment(.center)
-                            
-                            HStack(spacing: 0) {
-                                Text("\(numHundreds)")
-                                TextEditor(text: $hundreds)
-                                    .frame(maxWidth: 180, maxHeight: 50 ,alignment: .center)
-                                Text("\(percentHundreds)")
-                                Text("%")
-                            }
-                            .frame(minWidth: 250, minHeight: 25, alignment: .top)
-                            .foregroundColor(Color("darkGreen"))
-                            .font(.custom("HelveticaNeue", size: 30))
-                            .scrollDisabled(true)
-                            .multilineTextAlignment(.center)
-                            
-                            
-                       
-                        }
-                        .scrollContentBackground(.hidden)
-                        .background(Color("darkGreen"))
-                        
-                        
-                        
-                }
-            
-                Spacer()
+            Spacer()
                 
-            }.sheet(isPresented: $openCameraRoll) {
-                //ImagePicker(selectedImage: $imageSelected, sourceType: .camera)
-                ImagePicker(selectedImage: $imageSelected, sourceType: .photoLibrary)
-                
-            }
         }
         if camera{
-            ZStack(alignment: .bottomTrailing) {
-                Button(action: {
-                                changeProfileImage = true
+            VStack(spacing: 40) {
+                ZStack{
+                    Text("Result")
+                        .frame(
+                            maxWidth: .infinity,
+                            minHeight: 60,
+                            alignment: .leading)
+                        .matchedGeometryEffect(id: "title", in: namespace)
+                        .padding(.leading)
+                        .font(.system(size:30, weight: .heavy, design: .default))
+                        .foregroundColor(Color.white)
+                        .background(
+                            Color("darkGreen").matchedGeometryEffect(id: "background", in: namespace)
+                        )
+
+                        SelectButtons(
+                            isSelected: $camera,
+                            color: Color("darkGreen"),
+                            text: "",
+                            image: "camera.fill",
+                            imagePlace: 350,
+                            justIcon: true)
+                        .frame(alignment: .trailing)
+                        .onTapGesture {
+                            camera = true
+                            if camera{
+                                photoLib = false
+                                wallet = false
                                 openCameraRoll = true
-                                
-                            }, label: {
-                                if changeProfileImage {
-                                    Image(uiImage: imageSelected)
-                                        .resizable()
-                                        .frame(width: 120, height: 120)
-                                        .clipShape(Circle())
-                                } else {
-                                    Image("MoneyIcon")
-                                        .resizable()
-                                        .frame(width: 120, height: 120)
-                                        .clipShape(Circle())
-                                }
-                        })
-                Image(systemName: "plus")
-                    .frame(width: 30, height: 30)
-                    .foregroundColor(.white)
-                    .background(Color.gray)
-                    .clipShape(Circle())
-            }.sheet(isPresented: $openCameraRoll) {
-                ImagePicker(selectedImage: $imageSelected, sourceType: .camera)
-                //ImagePicker(selectedImage: $imageSelected, sourceType: .photoLibrary)
-                
-            }
+                            }
+                            
+                        }
+                        
+                        SelectButtons(
+                            isSelected: $photoLib,
+                            color: Color("darkGreen"),
+                            text: "",
+                            image: "photo.fill.on.rectangle.fill",
+                            imagePlace: 200,
+                            justIcon: true)
+                        .frame(alignment: .trailing)
+                        .onTapGesture {
+                            photoLib = true
+                            if photoLib{
+                                camera = false
+                                wallet = false
+                                openCameraRoll = true
+                            }
+                            
+                        }
+                    
+                    SelectButtons(
+                        isSelected: $wallet,
+                        color: Color("darkGreen"),
+                        text: "",
+                        image: "banknote.fill",
+                        imagePlace: 50,
+                        justIcon: true)
+                        .onTapGesture {
+                            wallet = true
+                        if wallet{
+                            startScreen = false
+                            camera = false
+                            photoLib = false
+                        }
+                    }
+                    
+                    
+                }.sheet(isPresented: $openCameraRoll) {
+                    ImagePicker(selectedImage: $imageSelected, sourceType: .camera)
+                }
+                Image(uiImage: imageSelected)
+                    .resizable()
+                    .frame(width: 250, height: 250, alignment: .center)
+                    
+                    Text("Total Amount Detected: $" + "\(amountDetected)")
+                        .font(.custom("HelveticaNeue", size: 30))
+                    
+                        .frame(alignment: .center)
+                    
+                    List {
+                        
+                        Text("BreakDown")
+                            .frame(maxWidth: 350, maxHeight: 50 ,alignment: .center)
+                            .underline()
+                        
+                        Text("\(numOnes) " + ones +  " conf: \(percentOnes)%")
+                            .frame(maxWidth: 350, maxHeight: 50 ,alignment: .center)
+                        
+                        Text("\(numFives) " + fives + " conf: \(percentFives)%")
+                            .frame(maxWidth: 350, maxHeight: 50 ,alignment: .center)
+                        
+                        Text("\(numTens) " + tens + " conf: \(percentTens)%")
+                            .frame(maxWidth: 350, maxHeight: 50 ,alignment: .center)
+                        
+                        Text("\(numTwenties) " + twenties + " conf: \(percentTwenties)%")
+                            .frame(maxWidth: 350, maxHeight: 50 ,alignment: .center)
+                        
+                        Text("\(numFifties) " + fifties + " conf: \(percentFifties)%")
+                            .frame(maxWidth: 350, maxHeight: 50 ,alignment: .center)
+                        
+                        Text("\(numHundreds) " + hundreds + " conf: \(percentHundreds)%")
+                            .frame(maxWidth: 350, maxHeight: 50 ,alignment: .center)
+                        
+                    }
+                    .font(.custom("HelveticaNeue", size: 30))
+                    .scrollContentBackground(.hidden)
+                    .background(Color("darkGreen"))
+                    .foregroundColor(Color("darkGreen"))
+                    
+                }
+            Spacer()
         }
         if wallet {
-            
+            VStack(spacing: 20) {
+               
+                    ZStack{
+                        Text("Wallet")
+                            .frame(
+                                maxWidth: .infinity,
+                                minHeight: 60,
+                                alignment: .leading)
+                            .matchedGeometryEffect(id: "title", in: namespace)
+                            .padding(.leading)
+                            .font(.system(size:30, weight: .heavy, design: .default))
+                            .foregroundColor(Color.white)
+                            .background(
+                                Color("darkGreen").matchedGeometryEffect(id: "background", in: namespace)
+                            )
+                        SelectButtons(
+                            isSelected: $camera,
+                            color: Color("darkGreen"),
+                            text: "",
+                            image: "camera.fill",
+                            imagePlace: 350,
+                            justIcon: true)
+                        .frame(alignment: .trailing)
+                        .onTapGesture {
+                            camera = true
+                            if camera{
+                                openCameraRoll = true
+                                photoLib = false
+                                wallet = false
+                            }
+                            
+                        }
+                        
+                        SelectButtons(
+                            isSelected: $photoLib,
+                            color: Color("darkGreen"),
+                            text: "",
+                            image: "photo.fill.on.rectangle.fill",
+                            imagePlace: 200,
+                            justIcon: true)
+                        .frame(alignment: .trailing)
+                        .onTapGesture {
+                            photoLib = true
+                            if photoLib{
+                                openCameraRoll = true
+                                camera = false
+                                wallet = false
+                            }
+                            
+                        }
+                    
+                }
+                ZStack {
+                    
+                    Image("wallet")
+                        .resizable()
+                        .frame(width: 250, height: 250, alignment: .center)
+                        .matchedGeometryEffect(id: "wallet", in: namespace)
+                    
+                    Text("$ " + "\(totalMoney)")
+                        .font(.custom("HelveticaNeue",size: 40)).bold()
+                        .frame(width: 275, height: 175, alignment: .center)
+                        .matchedGeometryEffect(id: "wallet", in: namespace)
+                        .foregroundColor(Color("darkGreen"))
+                }
+                
+                Text("Last Scan")
+                    .font(.custom("HelveticaNeue",size: 40)).bold()
+                    .frame(width: 300, height: 40, alignment: .center)
+                    .padding()
+                    .background(Color("darkGreen"))
+                    .foregroundColor(.white)
+                
+                Text("$" + "\(lastScan)")
+                    .font(.custom("HelveticaNeue",size: 60)).bold()
+                    .frame(width: 300, height: 5, alignment: .center)
+                    .padding()
+                    .foregroundColor(Color("darkGreen"))
+                
+                Text("Saved Scans:")
+                    .font(.custom("HelveticaNeue",size: 40)).bold()
+                    .frame(width: 300, height: 25, alignment: .center)
+                    .foregroundColor(Color("darkGreen"))
+                    
+                
+                List {
+                    
+                    Text("\(numOnes) " + ones)
+                        .frame(maxWidth: 350, maxHeight: 50 ,alignment: .center)
+                    
+                    Text("\(numFives) " + fives)
+                        .frame(maxWidth: 350, maxHeight: 50 ,alignment: .center)
+                    
+                    Text("\(numTens) " + tens)
+                        .frame(maxWidth: 350, maxHeight: 50 ,alignment: .center)
+                    
+                    Text("\(numTwenties) " + twenties)
+                        .frame(maxWidth: 350, maxHeight: 50 ,alignment: .center)
+                    
+                    Text("\(numFifties) " + fifties)
+                        .frame(maxWidth: 350, maxHeight: 50 ,alignment: .center)
+                        
+                    Text("\(numHundreds) " + hundreds)
+                            .frame(maxWidth: 350, maxHeight: 50 ,alignment: .center)
+                }
+                .font(.custom("HelveticaNeue", size: 30))
+                .scrollContentBackground(.hidden)
+                .background(Color("darkGreen"))
+                .foregroundColor(Color("darkGreen"))
+                .scrollDisabled(true)
+
+                    
+               
+            } //VStack
         }
     } // -- body
 } // -- struct
