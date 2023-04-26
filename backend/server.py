@@ -2,7 +2,10 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from roboflow import Roboflow
 import os
-import base64;
+import base64
+import datetime
+from PIL import Image
+from io import BytesIO
 
 app = Flask(__name__)
 CORS(app)
@@ -70,26 +73,36 @@ def upload():
         return jsonify({'success': False}), 500
 
 #new route for webcame upload ???
+#new route for webcame upload ???
 @app.route('/upload_image', methods=['POST'])
 def upload_image():
     # Get the image data from the request
-    image_data = request.form.get('image')
+    image_str = request.form.get('image')
+    #print(image_data)
+    # Extract the base64 data from the image string
+    image_data = image_str.split(',')[1]
 
-    # Decode the base64 string into bytes
+    # Decode the base64 data into bytes
     image_bytes = base64.b64decode(image_data)
 
-    # Write the image bytes to a file (optional)
-    with open('image.jpg', 'wb') as f:
-        f.write(image_bytes)
+    # Create an image object from the bytes
+    image = Image.open(BytesIO(image_bytes))
 
-    # Do something with the image bytes
-    # ...
+    # Generate a unique filename
+    timestamp = datetime.datetime.now()
+    filename = f"{timestamp}.jpg"
 
-    # Return a response
+    # Save the image to the images folder
+    if not os.path.exists('images'):
+        os.makedirs('images')
+    image.save(os.path.join('images', filename), 'JPEG')
+
+    # Open the image using the default viewer
+    #image.show()
     response = {'message': 'Image uploaded successfully'}
     return jsonify(response), 200
 #on server start process the images
-process_images()
+#process_images()
 print("runnning server")
 
 if __name__ == '__main__':

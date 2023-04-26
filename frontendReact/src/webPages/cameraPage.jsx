@@ -38,13 +38,9 @@ function cameraPage(){
   }
   function sendimage(event) {
     event.preventDefault();
-    if (image === null) {
-      console.error('No image captured');
-      return;
-    }
+
     const formData = new FormData();
-    const blob = new Blob([image], {type: 'image/jpeg'});
-    formData.append('image', blob, 'image.jpg');
+    formData.append('image', image);
     fetch('http://localhost:5000/upload_image', {
       method: 'POST',
       body: formData
@@ -63,7 +59,7 @@ function cameraPage(){
     console.log("trying to camptr")
     const imageSrc = webcamRef.current.getScreenshot();
       setImage(imageSrc);
-      console.log(imageSrc);
+      //console.log(imageSrc);
     },[webcamRef]);
     let navigate = useNavigate(); 
   const goHome = () =>{ 
