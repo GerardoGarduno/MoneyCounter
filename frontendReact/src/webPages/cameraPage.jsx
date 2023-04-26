@@ -36,12 +36,30 @@ function cameraPage(){
         }
       });
   }
-  function sendimage(event) {
+  function sendimagetofolder(event) {
     event.preventDefault();
 
     const formData = new FormData();
     formData.append('image', image);
     fetch('http://localhost:5000/upload_image', {
+      method: 'POST',
+      body: formData
+    }).then(response => {
+      if (response.ok) {
+        alert('Image uploaded successfully');
+      } else {
+        alert('Image upload failed');
+      }
+    }).catch(error => {
+      console.error('Error uploading image:', error);
+    });
+  }
+  function imageRunModel(event) {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append('image', image);
+    fetch('http://localhost:5000/upload_image_model', {
       method: 'POST',
       body: formData
     }).then(response => {
@@ -87,8 +105,10 @@ function cameraPage(){
           ) : (
           <>  
             <img className = "webcam" src ={image} alt = "screenshot"/>
-            <button className= "submit" onClick = {sendimage}>Send to Model</button>
-            <button className="submit" onClick={() => setImage(null)}>Retake</button>            
+            <button className='submit' onClick= {imageRunModel}>Run model</button>
+            <button className= "submit" onClick = {sendimagetofolder}>Send to Folder</button>
+            <button className="submit" onClick={() => setImage(null)}>Retake</button>  
+            <h1>Click upload to add wallet</h1>          
           </>  
           )}
    

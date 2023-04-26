@@ -73,7 +73,6 @@ def upload():
         return jsonify({'success': False}), 500
 
 #new route for webcame upload ???
-#new route for webcame upload ???
 @app.route('/upload_image', methods=['POST'])
 def upload_image():
     # Get the image data from the request
@@ -102,7 +101,25 @@ def upload_image():
     response = {'message': 'Image uploaded successfully'}
     return jsonify(response), 200
 #on server start process the images
-#process_images()
+@app.route('/upload_image_model', methods=['POST'])
+def run_model_screenshot():
+    # Get the image data from the request
+    image_str = request.form.get('image')
+    image_data = image_str.split(',')[1]
+
+    # Decode the base64 data into bytes
+    image_bytes = base64.b64decode(image_data)
+
+    # Create an image object from the bytes
+    image = Image.open(BytesIO(image_bytes))
+    print(image_data)
+    # prediction = model.predict(image_str, confidence=4, overlap=30).json()
+
+    # for obj in prediction['predictions']:
+    #     print(obj)
+    response = {'message': 'Image uploaded successfully'}
+    return jsonify(response), 200
+process_images()
 print("runnning server")
 
 if __name__ == '__main__':
