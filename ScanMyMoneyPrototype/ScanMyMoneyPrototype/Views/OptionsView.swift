@@ -16,11 +16,12 @@ struct OptionsView: View {
     @State var openCameraRoll = false
     @State var imageSelected = UIImage()
     
-    @State var isSelected = false;
-    @State var isSelected2 = false;
+    @State var camera = false;
+    @State var photoLib = false;
+    @State var wallet = false;
     var body: some View {
         HStack{
-            VStack(spacing: 80) {
+            VStack(spacing: 45) {
                 Text("ScanMyMoney")
                     .frame(
                         maxWidth: .infinity,
@@ -28,7 +29,8 @@ struct OptionsView: View {
                         alignment: .leading)
                     .matchedGeometryEffect(id: "title", in: namespace)
                 //                        .font(.system(size: 30, weight: .medium, design: .default))
-                    .font(.custom("impact", size: 30).weight(.bold))
+                    //.font(.custom("impact", size: 30).weight(.bold))
+                    .font(.system(size: 30 ,weight: .heavy, design: .default))
                     .foregroundColor(Color.white)
                     .background(
                         
@@ -37,64 +39,66 @@ struct OptionsView: View {
                 
                 
                 Text("Choose an Option".uppercased())
-                    .font(.custom("impact", size: 30).weight(.bold))
-                   
                     .frame(
                         maxWidth: .infinity,
                         minHeight: 60,
                         alignment: .center)
                 //                        .font(.system(size: 30, weight: .medium, design: .default))
-                    .font(.custom("impact", size: 30).weight(.bold))
+                    .font(.title).bold()
                     .foregroundColor(Color("darkGreen"))
                 
                 
                 
                 
-                VStack(spacing: 20) {
-//                    SelectButton(
-//                        isSelected: $isSelected,
-//                        color: Color("darkGreen"),
-//                        text: "Yes")
-//                    ).onTapGesture {
-//                        if {
-//
-//                        }
-//                    }
-                    Button {
-                        
-                    } label: {
-                        Label("Photo Library", systemImage: "camera.fill")
-                            .font(.system(size: 35))
+                VStack(spacing: 40) {
+                    SelectButtons(
+                        isSelected: $camera,
+                        color: Color("darkGreen"),
+                        text: "Camera Roll",
+                        image: "camera",
+                    imagePlace: 250)
+                        .onTapGesture {
+                        if camera{
+                            photoLib = false
+                        }
                         
                     }
-                    .foregroundColor(.white)
-                    .background(Color("darkGreen"))
-                    .buttonStyle(.borderedProminent)
-                    .buttonBorderShape(.capsule)
-                    .tint(Color("darkGreen"))
-                    .cornerRadius(15)
                     
-                    Button {
-                        
-                    } label: {
-                        Label("Photo Library", systemImage: "camera.fill")
-                            .font(.system(size: 35))
-                        
+                    SelectButtons(
+                        isSelected: $photoLib,
+                        color: Color("darkGreen"),
+                        text: "Photo Library",
+                        image: "camera",
+                        imagePlace: 250)
+                        .onTapGesture {
+                        if photoLib{
+                            camera = false
+                        }
                     }
-                    .foregroundColor(.white)
-                    .background(Color("darkGreen"))
-                    .buttonStyle(.borderedProminent)
-                    .buttonBorderShape(.capsule)
-                    .tint(Color("darkGreen"))
-                    .cornerRadius(15)
+                    
+                    SelectButtons(
+                        isSelected: $wallet,
+                        color: Color("darkGreen"),
+                        text: "Wallet",
+                        image: "banknote.fill",
+                        imagePlace: 250)
+                        .onTapGesture {
+                        if photoLib{
+                            camera = false
+                        }
+                    }
+                 
                 }
-                
+                Image("MoneyIcon")
+                    .resizable()
+                    .foregroundColor(.accentColor)
+                    .scaledToFit()
+                    
+                    
                 Spacer()
             }
             
-            VStack(spacing: 10){
-                
-            }
+           
         }
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1204067D29F8928C00B78663 /* PhotoLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1204067C29F8928C00B78663 /* PhotoLibraryView.swift */; };
 		12054D4229E12CDE006D46EF /* ScanMyMoneyPrototypeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12054D4129E12CDE006D46EF /* ScanMyMoneyPrototypeApp.swift */; };
 		12054D4429E12CDE006D46EF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12054D4329E12CDE006D46EF /* ContentView.swift */; };
 		12054D4629E12CE0006D46EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12054D4529E12CE0006D46EF /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1204067C29F8928C00B78663 /* PhotoLibraryView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PhotoLibraryView.swift; sourceTree = "<group>"; tabWidth = 4; wrapsLines = 1; };
 		12054D3E29E12CDE006D46EF /* ScanMyMoneyPrototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScanMyMoneyPrototype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12054D4129E12CDE006D46EF /* ScanMyMoneyPrototypeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanMyMoneyPrototypeApp.swift; sourceTree = "<group>"; };
 		12054D4329E12CDE006D46EF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			children = (
 				12054D4129E12CDE006D46EF /* ScanMyMoneyPrototypeApp.swift */,
 				12054D4329E12CDE006D46EF /* ContentView.swift */,
+				1204067C29F8928C00B78663 /* PhotoLibraryView.swift */,
 				12D1A21B29F0B77200C0BAF6 /* OptionsView.swift */,
 				121F5DEE29F06D250093FC95 /* Launch Screen.storyboard */,
 				121F5DEB29EFC8FD0093FC95 /* MatchedView.swift */,
@@ -164,6 +167,7 @@
 				12054D4429E12CDE006D46EF /* ContentView.swift in Sources */,
 				1269517729F09161007E1606 /* imagePicker.swift in Sources */,
 				12D1A22029F2442900C0BAF6 /* SelectButtons.swift in Sources */,
+				1204067D29F8928C00B78663 /* PhotoLibraryView.swift in Sources */,
 				121F5DEC29EFC8FD0093FC95 /* MatchedView.swift in Sources */,
 				12D1A21C29F0B77200C0BAF6 /* OptionsView.swift in Sources */,
 				12054D4229E12CDE006D46EF /* ScanMyMoneyPrototypeApp.swift in Sources */,
@@ -295,6 +299,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ScanMyMoneyPrototype/Preview Content\"";
+				DEVELOPMENT_TEAM = T74UPA9Q22;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -323,6 +328,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ScanMyMoneyPrototype/Preview Content\"";
+				DEVELOPMENT_TEAM = T74UPA9Q22;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
