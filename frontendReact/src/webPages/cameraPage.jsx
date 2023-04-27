@@ -21,7 +21,7 @@ function cameraPage(){
         formData.append('file', files[i]);
       }
       setUploading(true);
-      fetch('http://localhost:5000/upload', {
+      fetch('http://localhost:5000/addToWalletAnalyse', {
         method: 'POST',
         body: formData
       }).then(response => {
@@ -46,7 +46,7 @@ function cameraPage(){
       body: formData
     }).then(response => {
       if (response.ok) {
-        alert('Image uploaded successfully');
+        alert('Image was sent to folder');
       } else {
         alert('Image upload failed');
       }
@@ -64,7 +64,8 @@ function cameraPage(){
       body: formData
     }).then(response => {
       if (response.ok) {
-        alert('Image uploaded successfully');
+        console.log(response);
+        alert('Image was be sent to model');
       } else {
         alert('Image upload failed');
       }
@@ -108,7 +109,7 @@ function cameraPage(){
             <button className='submit' onClick= {imageRunModel}>Run model</button>
             <button className= "submit" onClick = {sendimagetofolder}>Send to Folder</button>
             <button className="submit" onClick={() => setImage(null)}>Retake</button>  
-            <h1>Click upload to add wallet</h1>          
+            <h1>Click upload to add to wallet</h1>          
           </>  
           )}
    

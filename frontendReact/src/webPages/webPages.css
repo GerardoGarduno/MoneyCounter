@@ -123,10 +123,24 @@ color: #FFFFFF;
   background-color: #127C56;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-.webcam{
+/* .webcam{
   margin: auto;
   border-radius:40px;
   margin-bottom: 15px;
+} */
+
+.webcam {
+  margin: auto;
+  border-radius: 40px;
+  margin-bottom: 15px;
+  width: 100%; /* Make the webcam element fill the available width */
+}
+
+@media (min-width: 768px) {
+  /* Apply different styles for screens wider than 768px */
+  .webcam {
+    max-width: 500px; /* Limit the maximum width of the webcam element */
+  }
 }
 .webstream{
   margin-top: 50px;

@@ -6,6 +6,7 @@ import base64
 import datetime
 from PIL import Image
 from io import BytesIO
+import tempfile
 
 app = Flask(__name__)
 CORS(app)
@@ -22,6 +23,7 @@ image_folder = os.path.join(script_folder, 'images')
 # Initialize total and bills
 total = 0
 bills = []
+screenshot = []
 #funtion that runs the model on entire wallet
 def process_images():
     global total, bills
@@ -60,7 +62,8 @@ def get_total():
 def get_bills():
     return jsonify({'bills': bills})
 
-@app.route('/upload', methods=['POST'])
+
+@app.route('/addToWalletAnalyse', methods=['POST'])
 def upload():
     try:
         files = request.files.getlist('file')
@@ -98,13 +101,16 @@ def upload_image():
 
     # Open the image using the default viewer
     #image.show()
-    response = {'message': 'Image uploaded successfully'}
+    response = {'message': 'Image was sent to folder/database'}
     return jsonify(response), 200
 #on server start process the images
 @app.route('/upload_image_model', methods=['POST'])
 def run_model_screenshot():
     # Get the image data from the request
     image_str = request.form.get('image')
+    if not image_str:
+        response = {'error': 'No image data provided'}
+        return jsonify(response), 400
     image_data = image_str.split(',')[1]
 
     # Decode the base64 data into bytes
@@ -112,13 +118,19 @@ def run_model_screenshot():
 
     # Create an image object from the bytes
     image = Image.open(BytesIO(image_bytes))
-    print(image_data)
-    # prediction = model.predict(image_str, confidence=4, overlap=30).json()
 
-    # for obj in prediction['predictions']:
-    #     print(obj)
-    response = {'message': 'Image uploaded successfully'}
+    # Save the image to a temporary file
+    with tempfile.NamedTemporaryFile(suffix='.jpg') as f:
+        image.save(f.name)
+        # Run the model on the image
+        prediction = model.predict(f.name, confidence=4, overlap=30).json()
+        print(prediction)
+
+    # Return the prediction results as a JSON response
+    response = {'prediction': prediction}
     return jsonify(response), 200
+
+
 process_images()
 print("runnning server")
 
