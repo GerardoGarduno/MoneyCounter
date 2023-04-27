@@ -124,9 +124,11 @@ def run_model_screenshot():
         image.save(f.name)
         # Run the model on the image
         prediction = model.predict(f.name, confidence=4, overlap=30).json()
-        print(prediction)
+        #print(prediction)
 
     # Return the prediction results as a JSON response
+    # print(prediction['predictions'][0]['class'])
+    # print(prediction['confidence'][0]['confidence'])
     response = {'prediction': prediction}
     return jsonify(response), 200
 

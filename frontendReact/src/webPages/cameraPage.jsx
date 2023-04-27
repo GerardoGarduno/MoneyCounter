@@ -6,8 +6,9 @@ import "./webPages.css";
 function cameraPage(){
   const webcamRef = useRef(null);
   const [image,setImage] = useState(null);
-  const [screenshot,setScreenShot] = useState(false); //possible bug multiple attendpt to sedn 
   const [uploading, setUploading] = useState(false);
+  const [label, setLabel] = useState('');
+  const [confidence, setConfidence] = useState(0);
   function handleUpload(event) {
       event.preventDefault();
       const formData = new FormData();
@@ -64,7 +65,14 @@ function cameraPage(){
       body: formData
     }).then(response => {
       if (response.ok) {
-        console.log(response);
+        response.json().then(data => {
+          const label = data.prediction.predictions[0].class;
+          const confidence = data.prediction.predictions[0].confidence;
+          setLabel(label);
+          setConfidence(confidence);
+          console.log('Label:', label);
+          console.log('Confidence:', confidence);
+        });
         alert('Image was be sent to model');
       } else {
         alert('Image upload failed');
@@ -109,6 +117,8 @@ function cameraPage(){
             <button className='submit' onClick= {imageRunModel}>Run model</button>
             <button className= "submit" onClick = {sendimagetofolder}>Send to Folder</button>
             <button className="submit" onClick={() => setImage(null)}>Retake</button>  
+            <p>Label: {label}</p>
+            <h1>Confidence: {confidence}</h1>
             <h1>Click upload to add to wallet</h1>          
           </>  
           )}
