@@ -21,7 +21,7 @@ struct ImagePicker: UIViewControllerRepresentable {
         imagePicker.allowsEditing = false
         imagePicker.sourceType = sourceType
         imagePicker.delegate = context.coordinator
-        
+        /*
         //----------------------------
         // Load Image and Convert to Base64
         let image = UIImage(uiImage: imagePicker) // path to image to upload ex: image.jpg
@@ -57,7 +57,7 @@ struct ImagePicker: UIViewControllerRepresentable {
         }).resume()
         
         //-----------------------------
-        
+        */
         
         return imagePicker
         
