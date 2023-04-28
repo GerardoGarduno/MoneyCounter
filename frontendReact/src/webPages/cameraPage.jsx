@@ -7,7 +7,7 @@ function cameraPage(){
   const webcamRef = useRef(null);
   const [image,setImage] = useState(null);
   const [uploading, setUploading] = useState(false);
-  const [label, setLabel] = useState('');
+  const [label, setLabel] = useState('unknown');
   const [confidence, setConfidence] = useState(0);
   function handleUpload(event) {
       event.preventDefault();
@@ -57,7 +57,6 @@ function cameraPage(){
   }
   function imageRunModel(event) {
     event.preventDefault();
-
     const formData = new FormData();
     formData.append('image', image);
     fetch('http://localhost:5000/upload_image_model', {
@@ -66,14 +65,16 @@ function cameraPage(){
     }).then(response => {
       if (response.ok) {
         response.json().then(data => {
+          setLabel('');
+          setConfidence(0);
           const label = data.prediction.predictions[0].class;
           const confidence = data.prediction.predictions[0].confidence;
+          speak("I am " + Math.round(confidence * 100) + " percent sure that is a " + label +  " bill.");
+          speak("Please add to folder first then click upload to update virtual balance");
           setLabel(label);
           setConfidence(confidence);
-          console.log('Label:', label);
-          console.log('Confidence:', confidence);
         });
-        alert('Image was be sent to model');
+        alert('Image was sent to model');
       } else {
         alert('Image upload failed');
       }
@@ -93,6 +94,15 @@ function cameraPage(){
       let path = '/'; 
       navigate(path);
   }
+  const speak = (text) => {
+    const synth = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = .90; // slows down the speech by 50%
+    synth.speak(utterance);
+  };
+
+
+  
   return(
         <div>
           <div className="NavBar">
@@ -114,12 +124,16 @@ function cameraPage(){
           ) : (
           <>  
             <img className = "webcam" src ={image} alt = "screenshot"/>
-            <button className='submit' onClick= {imageRunModel}>Run model</button>
-            <button className= "submit" onClick = {sendimagetofolder}>Send to Folder</button>
-            <button className="submit" onClick={() => setImage(null)}>Retake</button>  
-            <p>Label: {label}</p>
-            <h1>Confidence: {confidence}</h1>
-            <h1>Click upload to add to wallet</h1>          
+            <div className = 'groupButtons'>
+              <button className='submit' onClick= {imageRunModel}>Run model</button>
+              <button className= "submit" onClick = {sendimagetofolder}>Send to Folder</button>
+              <button className="submit" onClick={() => setImage(null)}>Retake</button>  
+            </div>
+            <div className='screenshotLabels'>
+              <h1>Label: {label}</h1>
+              <h1>Confidence: {confidence}</h1>
+              <h1>Click "Send to Folder" then "Upload" to update balance</h1>          
+            </div>
           </>  
           )}
    

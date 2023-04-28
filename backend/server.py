@@ -23,7 +23,6 @@ image_folder = os.path.join(script_folder, 'images')
 # Initialize total and bills
 total = 0
 bills = []
-screenshot = []
 #funtion that runs the model on entire wallet
 def process_images():
     global total, bills
@@ -62,7 +61,8 @@ def get_total():
 def get_bills():
     return jsonify({'bills': bills})
 
-
+#this route handles file upload and does the analysis after adding photo
+#to the folder
 @app.route('/addToWalletAnalyse', methods=['POST'])
 def upload():
     try:
@@ -75,7 +75,7 @@ def upload():
         print(str(e))
         return jsonify({'success': False}), 500
 
-#new route for webcame upload ???
+#This Route Send the screen shot to the folder where all images are kept for analysis
 @app.route('/upload_image', methods=['POST'])
 def upload_image():
     # Get the image data from the request
@@ -103,7 +103,9 @@ def upload_image():
     #image.show()
     response = {'message': 'Image was sent to folder/database'}
     return jsonify(response), 200
-#on server start process the images
+
+
+#this route sends the screenshot to the model and returns the JSON
 @app.route('/upload_image_model', methods=['POST'])
 def run_model_screenshot():
     # Get the image data from the request
@@ -125,10 +127,6 @@ def run_model_screenshot():
         # Run the model on the image
         prediction = model.predict(f.name, confidence=4, overlap=30).json()
         #print(prediction)
-
-    # Return the prediction results as a JSON response
-    # print(prediction['predictions'][0]['class'])
-    # print(prediction['confidence'][0]['confidence'])
     response = {'prediction': prediction}
     return jsonify(response), 200
 
