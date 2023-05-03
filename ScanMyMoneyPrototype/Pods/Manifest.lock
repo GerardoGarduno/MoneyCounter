@@ -1,0 +1,21 @@
+PODS:
+  - Roboflow (0.1.5)
+
+DEPENDENCIES:
+  - Roboflow (from `https://github.com/roboflow-ai/roboflow-ios-podspecs`)
+
+EXTERNAL SOURCES:
+  Roboflow:
+    :git: https://github.com/roboflow-ai/roboflow-ios-podspecs
+
+CHECKOUT OPTIONS:
+  Roboflow:
+    :commit: d9b3c9c628ccab15f1592a58dadea89cb7c1fcd5
+    :git: https://github.com/roboflow-ai/roboflow-ios-podspecs
+
+SPEC CHECKSUMS:
+  Roboflow: 76f48528c62de5ee27b438fd2cd74af2ebece7f5
+
+PODFILE CHECKSUM: 5c556cd934dbc7639c96a8fe5df00bad8043cd08
+
+COCOAPODS: 1.12.1
