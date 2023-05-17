@@ -20,11 +20,8 @@ For the front end use npm install
 note: you may need to do brew install node on mac or manually iinstall node from there webite to run npm.
 then run npm run dev
 
-**[PART1]Table Page**
-![](https://github.com/GerardoGarduno/MoneyCounter/assets/48225150/9a6c67af-8deb-41fc-8fd1-3d3c7b046cde)
+![first(showing table)](https://github.com/GerardoGarduno/MoneyCounter/assets/48225150/bafd751b-7a17-4591-b3f2-7d843dd70981)
 
-**Showing the camera page**
-![PART2](https://github.com/GerardoGarduno/MoneyCounter/assets/48225150/0c710b0b-9303-49ba-9e41-aa54951fc40e)
+![PART2 AGAIN AGAIN](https://github.com/GerardoGarduno/MoneyCounter/assets/48225150/5d622b35-aba6-42ac-96d1-549afe71af93)
 
-**Showing Table**
-![PART3](https://github.com/GerardoGarduno/MoneyCounter/assets/48225150/2158184c-c515-4df9-9649-6ed6198d6b18)
+![part3(showing new table](https://github.com/GerardoGarduno/MoneyCounter/assets/48225150/4c315efd-c79b-4cdb-8ab8-731cd074ca7b)
