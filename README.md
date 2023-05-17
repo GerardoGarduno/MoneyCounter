@@ -21,9 +21,10 @@ note: you may need to do brew install node on mac or manually iinstall node from
 then run npm run dev
 
 **Table Page**
-![Uploading first(showing table).gif…]()
+![first(showing table)](https://github.com/GerardoGarduno/MoneyCounter/assets/48225150/9a6c67af-8deb-41fc-8fd1-3d3c7b046cde)
 
 **Showing the camera page**
+
 
 **Showing Table**
 ![part3(showing new table](https://github.com/GerardoGarduno/MoneyCounter/assets/48225150/2158184c-c515-4df9-9649-6ed6198d6b18)
