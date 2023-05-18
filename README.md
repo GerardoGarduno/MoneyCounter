@@ -19,17 +19,18 @@ To run the program, follow these steps:
 
 
 
-**Showing the table before new dollar is added to wallet**
+##**Showing the table before new dollar is added to wallet**
 ![first(showing table)](https://github.com/GerardoGarduno/MoneyCounter/assets/48225150/bafd751b-7a17-4591-b3f2-7d843dd70981)
-**Showing the camera sending image to roboflow api**
+##**Showing the camera sending image to roboflow api**
 ![PART2 AGAIN AGAIN](https://github.com/GerardoGarduno/MoneyCounter/assets/48225150/5d622b35-aba6-42ac-96d1-549afe71af93)
-**Showing the updated 'wallet' with the new total and new data from the new bill**
+##**Showing the updated 'wallet' with the new total and new data from the new bill**
 ![part3(showing new table](https://github.com/GerardoGarduno/MoneyCounter/assets/48225150/4c315efd-c79b-4cdb-8ab8-731cd074ca7b)
 
-**Future: **
+###**Future: **
 1) need to add authentication
 2) improve the model to be able to detect multiple bills from same images
 3) serial number (avoid repetitions)
-**Features:**
+
+###**Features:**
 1)Mobile resposive
 2)Text to speech after sending the bill to roboflow api.
