@@ -2,19 +2,25 @@
 Application Identifies money and sum total
 
 To run the program, follow these steps:
+1) git clone https://github.com/GerardoGarduno/MoneyCounter
+2) cd /MoneyCounter/babckend
+3) python is needed to run this program if python is not installed here is link to install python
+  a)Mac: https://docs.brew.sh/Homebrew-and-Python
+  b)Windows: https://learn.microsoft.com/en-us/windows/python/beginners 
+4) pip install -r requirements.txt
+6) python3 server.py -> the server will begin to call the roboflow api to begin analysis on the current jpeg images in the 'images' folder inside the backend directory.
+7) open a new terminal and navigate to the front end cd /MoneyCounter/frontendReact
+8) You will need to have node installed first
+  a)Mac: https://formulae.brew.sh/formula/node
+  b)Windows: https://nodejs.org/en/download
+10) npm run dev -> press 'o' to open local port 
+11) You should now have two terminal running 1] running the server and 2] running the frontend.
 
-Install the necessary dependencies:
 
-OpenCV
-imutils
 
-You can use Brew install on Mac
 
-1)Navigate to backend folder using cd backend
-2)Run the python file using python dollardetection.py or python3 dollardetection.py
-3)If prompted with errors install the dependecies using 'brew install package'  
 
-Note: Uncomment the "cv2.imshow" lines to show the intermediate results of the image processing. 
+
 
 For the front end use npm install
 note: you may need to do brew install node on mac or manually iinstall node from there webite to run npm.
